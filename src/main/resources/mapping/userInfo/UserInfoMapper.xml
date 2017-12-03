@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ray.userCenter.mapper.UserInfoMapper" >
+
+    <resultMap id="BaseResultMap" type="com.ray.userCenter.entity.UserInfoEntity" >
+        <id column="id" property="userId" jdbcType="INTEGER" />
+        <result column="group_id" property="groupId" jdbcType="INTEGER" />
+        <result column="userName" property="userName" jdbcType="VARCHAR" />
+        <result column="passWord" property="passWord" jdbcType="VARCHAR" />
+        <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+        <result column="email" property="email" jdbcType="VARCHAR" />
+        <result column="crete_time" property="creteTime" jdbcType="BIGINT" />
+        <result column="crate_userId" property="crateUserId" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="tableName">
+        base_user_userInfo
+    </sql>
+
+    <select id="queryUserInfoByUserId" resultMap="BaseResultMap">
+        SELECT
+        *
+        FROM
+        <include refid="tableName"/>
+        <where>
+            <if test="userId!=null">
+               AND id=${userId}
+            </if>
+        </where>
+    </select>
+
+    <insert id="insertUserInfo" useGeneratedKeys="true" keyProperty="userId">
+        INSERT INTO
+        <include refid="tableName"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userinfo.groupId !=null">
+                group_id,
+            </if>
+            <if test="userinfo.userName !=null and userinfo.userName!=''">
+                userName,
+            </if>
+            <if test="userinfo.passWord !=null and userinfo.passWord != ''">
+                passWord,
+            </if>
+            <if test="userinfo.mobile !=null and userinfo.mobile!=''">
+                mobile,
+            </if>
+            <if test="userinfo.email !=null and userinfo.email != ''">
+                email,
+            </if>
+            <if test="userinfo.creteTime !=null and userinfo.creteTime != ''">
+                crete_time,
+            </if>
+            <if test="userinfo.crateUserId !=null">
+                crate_userId,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userinfo.groupId !=null">
+                #{groupId},
+            </if>
+            <if test="userinfo.userName !=null and userinfo.userName!=''">
+                #{userName},
+            </if>
+            <if test="userinfo.passWord !=null and userinfo.passWord != ''">
+                #{passWord},
+            </if>
+            <if test="userinfo.mobile !=null and userinfo.mobile!=''">
+                #{mobile},
+            </if>
+            <if test="userinfo.email !=null and userinfo.email != ''">
+                #{email},
+            </if>
+            <if test="userinfo.creteTime !=null and userinfo.creteTime != ''">
+                #{creteTime},
+            </if>
+            <if test="userinfo.crateUserId !=null">
+                #{crateUserId},
+            </if>
+
+
+        </trim>
+
+    </insert>
+
+
+</mapper>

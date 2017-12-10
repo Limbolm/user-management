@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ray.userCenter.mapper.UserInfoMapper" >
+<mapper namespace="com.ray.userCenter.mapper.UserInfoMapper">
 
-    <resultMap id="BaseResultMap" type="com.ray.userCenter.entity.UserInfoEntity" >
-        <id column="id" property="userId" jdbcType="INTEGER" />
-        <result column="group_id" property="groupId" jdbcType="INTEGER" />
-        <result column="userName" property="userName" jdbcType="VARCHAR" />
-        <result column="passWord" property="passWord" jdbcType="VARCHAR" />
-        <result column="mobile" property="mobile" jdbcType="VARCHAR" />
-        <result column="email" property="email" jdbcType="VARCHAR" />
-        <result column="crete_time" property="creteTime" jdbcType="BIGINT" />
-        <result column="crate_userId" property="crateUserId" jdbcType="INTEGER" />
+    <resultMap id="BaseResultMap" type="com.ray.userCenter.entity.UserInfoEntity">
+        <id column="id" property="userId" jdbcType="INTEGER"/>
+        <result column="group_id" property="groupId" jdbcType="INTEGER"/>
+        <result column="userName" property="userName" jdbcType="VARCHAR"/>
+        <result column="passWord" property="passWord" jdbcType="VARCHAR"/>
+        <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="crete_time" property="creteTime" jdbcType="BIGINT"/>
+        <result column="crate_userId" property="crateUserId" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="tableName">
@@ -24,7 +24,7 @@
         <include refid="tableName"/>
         <where>
             <if test="userId!=null">
-               AND id=${userId}
+                AND id=${userId}
             </if>
         </where>
     </select>
@@ -57,25 +57,25 @@
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="userinfo.groupId !=null">
-                #{groupId},
+                #{userinfo.groupId},
             </if>
             <if test="userinfo.userName !=null and userinfo.userName!=''">
-                #{userName},
+                #{userinfo.userName},
             </if>
             <if test="userinfo.passWord !=null and userinfo.passWord != ''">
-                #{passWord},
+                #{userinfo.passWord},
             </if>
             <if test="userinfo.mobile !=null and userinfo.mobile!=''">
-                #{mobile},
+                #{userinfo.mobile},
             </if>
             <if test="userinfo.email !=null and userinfo.email != ''">
-                #{email},
+                #{userinfo.email},
             </if>
             <if test="userinfo.creteTime !=null and userinfo.creteTime != ''">
-                #{creteTime},
+                #{userinfo.creteTime},
             </if>
             <if test="userinfo.crateUserId !=null">
-                #{crateUserId},
+                #{userinfo.crateUserId},
             </if>
 
 

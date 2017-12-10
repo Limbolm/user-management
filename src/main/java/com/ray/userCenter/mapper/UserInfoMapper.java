@@ -21,8 +21,8 @@ public interface UserInfoMapper {
 
     /**
      * 新增用户信息
-     * @param userInfo
+     * @param userinfo
      * @return
      */
-    int insertUserInfo(@Param("userInfo")UserInfoEntity userInfo);
+    int insertUserInfo(@Param("userinfo")UserInfoEntity userinfo);
 }

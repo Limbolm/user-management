@@ -1,13 +1,13 @@
 package com.ray.userCenter.controller;
 
+import com.alibaba.fastjson.support.spring.annotation.ResponseJSONP;
 import com.ray.userCenter.entity.UserInfoEntity;
+import com.ray.userCenter.exception.BaseException;
 import com.ray.userCenter.service.UserInfoService;
 import com.ray.userCenter.util.RedisUtil;
 import com.ray.userCenter.vo.UserInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -41,9 +41,9 @@ public class UsuerInfoController {
         return (UserInfoEntity) redisUtil.getObject("test1");
     }
 
-    public boolean addUserInfo(UserInfoVo userInfo) throws Exception{
-
-    return true;
+    @RequestMapping(value = "addUserInfo",method = RequestMethod.POST)
+    public boolean addUserInfo(@RequestBody UserInfoVo userInfo) throws BaseException{
+    return userInfoService.saveUserinfo(userInfo);
 
     }
 

@@ -16,14 +16,13 @@ public class LoginController {
     //TODO:生成验证码
 
 
-
     //TODO:登录验证
 
-     public LoginInfoVo login(@NotNull String userName,@NotNull String password){
+    public LoginInfoVo login(@NotNull String userName, @NotNull String password) {
 
-          return null;
+        return null;
 
-     }
+    }
 
 
     //TODO:注销

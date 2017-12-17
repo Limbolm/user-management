@@ -60,6 +60,12 @@ public class RedisUtil {
         return result;
     }
 
+    /**
+     * 新增对象
+     * @param key
+     * @param value
+     * @return
+     */
     public boolean setKeyValue(final String key,Object value){
         boolean result=false;
         try{

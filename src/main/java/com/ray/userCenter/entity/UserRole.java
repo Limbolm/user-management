@@ -8,7 +8,16 @@ public class UserRole {
     private String Id;
     private String userId;
     private Integer roleLeave;
+    private String userName;
     private String roleName;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
     public String getRoleName() {
         return roleName;

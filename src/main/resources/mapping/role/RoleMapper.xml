@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ray.userCenter.mapper.RoleMapper">
+
+    <resultMap id="BaseResultMap" type="com.ray.userCenter.entity.UserRole">
+        <id column="id" property="Id" jdbcType="VARCHAR"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="VARCHAR"/>
+        <result column="role_leave" property="roleLeave" jdbcType="INTEGER"/>
+        <result column="role_name" property="roleName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="tableName">
+        base_user_role
+    </sql>
+
+    <sql id="foreignKeyTableName1">
+        base_user_userInfo
+    </sql>
+
+    <sql id="foreignKeyTableName2">
+        base_role
+    </sql>
+
+    <select id="queryUserRoleByUserId" resultMap="BaseResultMap">
+        SELECT
+        t.role_id,
+        t.user_id,
+        f1.user_name,
+        f2.role_name,
+        f2.role_leave
+        FROM
+        <include refid="tableName"/> t
+        INNER  JOIN
+        <include refid="foreignKeyTableName1"/> f1
+        ON t.user_id = f1.user_id
+        <include refid="foreignKeyTableName12"/> f2
+        ON t.role_id = f2.id
+        <where>
+            <if test="userId != null and userId != ''">
+                AND t.user_id=${userId}
+            </if>
+        </where>
+    </select>
+
+    <insert id="insertRole" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO
+        <include refid="foreignKeyTableName2"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="role.roleName !=null and role.roleLeave!=''">
+                role_name,
+            </if>
+            <if test="role.roleLeave !=null and role.roleLeave!=''">
+                role_leave,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="role.roleName !=null and role.roleLeave!=''">
+                #{roleName},
+            </if>
+            <if test="role.roleLeave !=null and role.roleLeave!=''">
+                #{roleLeave},
+            </if>
+        </trim>
+
+    </insert>
+
+    <update id="updateMessages">
+        UPDATE
+        <include refid="foreignKeyTableName2"/>
+        SET
+        <if test="role.roleName !=null and role.roleLeave!=''">
+            role_name = #{roleName},
+        </if>
+        <if test="role.roleLeave !=null and role.roleLeave!=''">
+            role_leave = #{roleLeave},
+        </if>
+        WHERE id = #{roleId}
+    </update>
+
+    <delete id="deleteRoleById" parameterType="java.lang.String">
+        DELETE FROM
+        <include refid="foreignKeyTableName2"/>
+        WHERE
+        id = #{roleId}
+    </delete>
+
+</mapper>

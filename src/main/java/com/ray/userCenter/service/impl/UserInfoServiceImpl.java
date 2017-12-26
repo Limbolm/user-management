@@ -66,4 +66,21 @@ public class UserInfoServiceImpl implements UserInfoService {
         return false;
     }
 
+    public UserInfoEntity getUserInfoEntityByInfo(UserInfoEntity userInfo){
+        return userInfoMapper.getUserInfoEntityByInfo(userInfo);
+    };
+
+
+    public boolean checkPassWord(UserInfoEntity info){
+        //TODO:信息校验
+        AssertUtil.isNull(info);
+//		System.out.println(p!=null?p.getPasswd():"not found");
+        String password = MD5Utils.MD5Encrypt(info.getPassWord(), PRIVATE_KEY);
+//		String password = info.getPassword();
+        if(info!=null && password.equals(info.getPassWord())){
+            return true;
+        }else {
+            return false;
+        }
+    }
 }

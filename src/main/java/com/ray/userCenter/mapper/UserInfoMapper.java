@@ -25,4 +25,6 @@ public interface UserInfoMapper {
      * @return
      */
     int insertUserInfo(@Param("userinfo")UserInfoEntity userinfo);
+
+    UserInfoEntity getUserInfoEntityByInfo(UserInfoEntity info);
 }

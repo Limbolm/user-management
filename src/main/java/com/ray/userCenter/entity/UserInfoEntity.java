@@ -15,6 +15,8 @@ public class UserInfoEntity implements Serializable {
 
     private  String userName;
 
+    private String account;
+
     private String passWord;
 
     private String mobile;
@@ -24,6 +26,14 @@ public class UserInfoEntity implements Serializable {
     private Long creteTime;
 
     private Long crateUserId;
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
 
     public Integer getUserId() {
         return userId;

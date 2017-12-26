@@ -9,6 +9,7 @@
         <result column="pass_word" property="passWord" jdbcType="VARCHAR"/>
         <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
         <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="account" property="account" jdbcType="VARCHAR"/>
         <result column="crete_time" property="creteTime" jdbcType="BIGINT"/>
         <result column="crate_userId" property="crateUserId" jdbcType="INTEGER"/>
     </resultMap>
@@ -25,6 +26,40 @@
         <where>
             <if test="userId!=null">
                 AND id=${userId}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryUserInfoByUserId" resultMap="BaseResultMap">
+        SELECT
+        user_id,
+        group_id,
+        user_name,
+        pass_word,
+        mobile,
+        email,
+        crete_time,
+        crate_userId
+        FROM
+        <include refid="tableName"/>
+        <where>
+            <if test="userId!=null">
+                AND id=${userId}
+            </if>
+            <if test="groupId!=null">
+                AND group_id=${groupId}
+            </if>
+            <if test="userName!=null">
+              AND user_name=${userName}
+            </if>
+            <if test="mobile!=null">
+              AND mobile=${mobile}
+            </if>
+            <if test="email!=null">
+              AND email=${email}
+            </if>
+            <if test="account!=null">
+                AND account=${account}
             </if>
         </where>
     </select>

@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author   lm
  */
-public class userInterceptor implements HandlerInterceptor {
+public class UserInterceptor implements HandlerInterceptor {
     @Autowired
     private ApplicationContext context;
     @Override

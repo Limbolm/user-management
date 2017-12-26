@@ -13,4 +13,9 @@ public interface UserInfoService {
     List<UserInfoEntity> getUserInfoList();
 
     boolean saveUserinfo(UserInfoVo userInfo);
+
+    UserInfoEntity getUserInfoEntityByInfo(UserInfoEntity userInfo);
+
+    boolean checkPassWord(UserInfoEntity userInfo);
+
 }

@@ -41,10 +41,15 @@ public class UsuerInfoController {
         return (UserInfoEntity) redisUtil.getObject("test1");
     }
 
+    /**
+     * 新增用户信息
+     * @param userInfo
+     * @return
+     * @throws BaseException
+     */
     @RequestMapping(value = "addUserInfo",method = RequestMethod.POST)
     public boolean addUserInfo(@RequestBody UserInfoVo userInfo) throws BaseException{
     return userInfoService.saveUserinfo(userInfo);
-
     }
 
     @RequestMapping(value = "getUserInfoList",method = RequestMethod.GET)

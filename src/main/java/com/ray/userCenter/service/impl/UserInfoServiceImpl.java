@@ -41,6 +41,12 @@ public class UserInfoServiceImpl implements UserInfoService {
         return userInfoMapper.queryUserInfoByUserId();
     }
 
+    /**
+     * 保存用户信息
+     * @param userInfo
+     * @return
+     * @throws BaseException
+     */
     @Override
     public boolean saveUserinfo(UserInfoVo userInfo) throws BaseException {
         try {

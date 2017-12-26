@@ -112,10 +112,29 @@
             <if test="userinfo.crateUserId !=null">
                 #{userinfo.crateUserId},
             </if>
-
-
         </trim>
+    </insert>
 
+    <insert id="bacthInsertUserInfo">
+        <include refid="tableName"/>
+                group_id,
+                userName,
+                passWord,
+                mobile,
+                email,
+                crete_time,
+                crate_userId
+           VALUE (
+        <foreach collection="userInfoList" item="userInfo" separator="),(">
+            #{userinfo.groupId},
+            #{userinfo.userName},
+            #{userinfo.passWord},
+            #{userinfo.mobile},
+            #{userinfo.email},
+            #{userinfo.creteTime},
+            #{userinfo.crateUserId}
+        </foreach>
+        )
     </insert>
 
 

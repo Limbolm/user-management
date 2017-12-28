@@ -79,18 +79,23 @@ public class LoginController {
 		 * !code.equalsIgnoreCase(checkCode)) return loginFailure(account, url,
 		 * "校验码错误！",rememberAccount, rememberPassword,request);
 		 */
+        Map<String,Object> map = new HashMap<String, Object>();
+        //登陆操作
         UserInfoEntity arg = new UserInfoEntity();
         arg.setAccount(account);
         arg.setPassWord(password);
         UserInfoEntity infoEntity = userInfoService.getUserInfoEntityByInfo(arg);
         boolean result = userInfoService.checkPassWord(infoEntity);
-        Map<String,Object> map = new HashMap<String, Object>();
         // LoginResult result=tokenService.login(account, password);
 
         if (!result) {
             map.put("result","帐号或密码错误！");
         }else{
             String token = tokenUtil.getLoginToken(arg.getAccount());
+            //单点登陆
+            String userToken = (String)redisUtil.getObject(account);
+            if(!StringUtils.isEmpty(userToken))
+                redisUtil.removeBykey(account);
             redisUtil.setKeyValue(infoEntity.getAccount(),token);
             map.put("result","登陆成功");
             if (StringUtils.isEmpty(url))

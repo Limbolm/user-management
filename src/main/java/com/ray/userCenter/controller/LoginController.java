@@ -69,6 +69,13 @@ public class LoginController {
 
 
     //TODO:注销
+    @RequestMapping("afterAuth.do")
+    public ModelAndView login(@RequestParam(required = true) String account) throws Exception {
+        String token = (String)redisUtil.getObject(account);
+        redisUtil.removeBykey(token);
+        redisUtil.removeBykey(account);
+        return new ModelAndView("");
+    }
 
     //验证方法
     protected Map<String,Object> internalLogin(String account, String password, String checkCode, String url,
@@ -79,6 +86,7 @@ public class LoginController {
 		 * !code.equalsIgnoreCase(checkCode)) return loginFailure(account, url,
 		 * "校验码错误！",rememberAccount, rememberPassword,request);
 		 */
+
         Map<String,Object> map = new HashMap<String, Object>();
         //登陆操作
         UserInfoEntity arg = new UserInfoEntity();
@@ -92,11 +100,12 @@ public class LoginController {
             map.put("result","帐号或密码错误！");
         }else{
             String token = tokenUtil.getLoginToken(arg.getAccount());
+
             //单点登陆
-            String userToken = (String)redisUtil.getObject(account);
-            if(!StringUtils.isEmpty(userToken))
+            if(redisUtil.exists(account))
                 redisUtil.removeBykey(account);
             redisUtil.setKeyValue(infoEntity.getAccount(),token);
+            redisUtil.setKeyValue(token,infoEntity);
             map.put("result","登陆成功");
             if (StringUtils.isEmpty(url))
                 url = successPage;
